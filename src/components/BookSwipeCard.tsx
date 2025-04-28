@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Book } from '../types/book';
 import { BookCard } from './BookCard';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/components/ui/sonner';
 
 interface BookSwipeCardProps {
   books: Book[];
@@ -18,19 +18,19 @@ export function BookSwipeCard({
   onEmpty
 }: BookSwipeCardProps) {
   const [currentBooks, setCurrentBooks] = useState<Book[]>([]);
-  const [likedBooks, setLikedBooks] = useState<Book[]>([]);
   
   useEffect(() => {
-    setCurrentBooks(books);
+    // Initialize with books from props
+    if (books && books.length > 0) {
+      setCurrentBooks(books);
+    }
   }, [books]);
   
   const handleLike = (book: Book) => {
-    setLikedBooks(prev => [...prev, book]);
-    
     // Show toast notification
     toast({
-      title: "Added to favorites!",
-      description: `"${book.title}" has been added to your favorites.`,
+      title: "Added to TBR!",
+      description: `"${book.title}" has been added to your list.`,
       duration: 3000,
     });
     
@@ -62,9 +62,9 @@ export function BookSwipeCard({
   if (currentBooks.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center space-y-4 p-6 h-96">
-        <p className="text-xl font-serif text-book-dark">No more books to discover!</p>
+        <p className="text-xl font-medium text-gray-700">No more books to discover!</p>
         <button 
-          className="px-4 py-2 bg-book-accent text-white rounded-lg shadow-md hover:bg-opacity-90 transition"
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-opacity-90 transition"
           onClick={() => setCurrentBooks(books)}
         >
           Start Over
@@ -74,7 +74,7 @@ export function BookSwipeCard({
   }
   
   return (
-    <div className="relative h-[70vh] flex flex-col items-center justify-center p-4">
+    <div className="relative h-[60vh] flex flex-col items-center justify-center">
       {currentBooks.slice(-2).map((book, index, array) => (
         <BookCard
           key={book.id}
