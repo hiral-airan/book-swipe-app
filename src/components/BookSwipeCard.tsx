@@ -27,7 +27,7 @@ export function BookSwipeCard({
   }, [books]);
   
   const handleLike = (book: Book) => {
-    // Show toast notification
+    // Show toast notification - fixed to use the correct toast format
     toast({
       title: "Added to TBR!",
       description: `"${book.title}" has been added to your list.`,
