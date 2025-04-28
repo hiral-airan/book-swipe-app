@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Book } from '../types/book';
 import { BookCard } from './BookCard';
@@ -27,12 +26,8 @@ export function BookSwipeCard({
   }, [books]);
   
   const handleLike = (book: Book) => {
-    // Show toast notification - fixed to use the correct toast format
-    toast({
-      title: "Added to TBR!",
-      description: `"${book.title}" has been added to your list.`,
-      duration: 3000,
-    });
+    // Show toast notification with the right format
+    toast(`"${book.title}" has been added to your list.`);
     
     // Remove the book from the stack
     setTimeout(() => {
