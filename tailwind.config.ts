@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				book: {
+					'cream': '#FFF8E8',
+					'paper': '#F5F2E8',
+					'dark': '#2C2926',
+					'accent': '#FF6B6B',
+					'positive': '#4CAF50',
+					'negative': '#F44336'
 				}
 			},
 			borderRadius: {
@@ -84,11 +93,48 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'swipe-right': {
+					from: {
+						transform: 'translateX(0) rotate(0)',
+						opacity: '1'
+					},
+					to: {
+						transform: 'translateX(150%) rotate(30deg)',
+						opacity: '0'
+					}
+				},
+				'swipe-left': {
+					from: {
+						transform: 'translateX(0) rotate(0)',
+						opacity: '1'
+					},
+					to: {
+						transform: 'translateX(-150%) rotate(-30deg)',
+						opacity: '0'
+					}
+				},
+				'pop-in': {
+					from: {
+						transform: 'scale(0.8)',
+						opacity: '0'
+					},
+					to: {
+						transform: 'scale(1)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'swipe-right': 'swipe-right 0.5s ease-out forwards',
+				'swipe-left': 'swipe-left 0.5s ease-out forwards',
+				'pop-in': 'pop-in 0.3s ease-out'
+			},
+			fontFamily: {
+				'serif': ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+				'sans': ['Inter', 'Helvetica', 'Arial', 'sans-serif']
 			}
 		}
 	},
