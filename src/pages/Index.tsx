@@ -5,6 +5,8 @@ import { Book } from '../types/book';
 import { BookSwipeCard } from '../components/BookSwipeCard';
 import { Header } from '../components/Header';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { addFavoriteBook } from '../utils/localStorage';
+import { toast } from '@/components/ui/sonner';
 
 const Index = () => {
   const [likedBooks, setLikedBooks] = useState<Book[]>([]);
@@ -12,6 +14,9 @@ const Index = () => {
 
   const handleLike = (book: Book) => {
     setLikedBooks(prev => [...prev, book]);
+    // Save to localStorage
+    addFavoriteBook(book);
+    toast(`Added "${book.title}" to favorites!`);
   };
 
   return (

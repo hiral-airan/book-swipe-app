@@ -2,19 +2,24 @@
 import { useEffect, useState } from 'react';
 import { Book } from '../types/book';
 import { Header } from '../components/Header';
+import { getFavoriteBooks, removeFavoriteBook } from '../utils/localStorage';
+import { toast } from '@/components/ui/sonner';
+import { Trash2 } from 'lucide-react';
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState<Book[]>([]);
   
-  // In a real app, this would come from a database or localStorage
-  // For demo purposes, we'll just show some placeholder content
   useEffect(() => {
-    // This would normally fetch from an API or local storage
-    import('../data/books').then(({ books }) => {
-      // Just use the first 3 books as "favorites" for demonstration
-      setFavorites(books.slice(0, 3));
-    });
+    // Load favorites from localStorage
+    const loadedFavorites = getFavoriteBooks();
+    setFavorites(loadedFavorites);
   }, []);
+
+  const handleRemove = (bookId: string) => {
+    removeFavoriteBook(bookId);
+    setFavorites(prev => prev.filter(book => book.id !== bookId));
+    toast('Book removed from favorites');
+  };
 
   return (
     <div className="min-h-screen bg-book-paper">
@@ -45,12 +50,19 @@ const Favorites = () => {
                 key={book.id} 
                 className="bg-white rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-[1.02]"
               >
-                <div className="h-64 overflow-hidden">
+                <div className="h-64 overflow-hidden relative">
                   <img 
                     src={book.coverImage} 
                     alt={`${book.title} cover`}
                     className="w-full h-full object-cover"
                   />
+                  <button 
+                    onClick={() => handleRemove(book.id)}
+                    className="absolute top-2 right-2 p-2 bg-white/80 rounded-full hover:bg-red-100 transition-colors"
+                    aria-label="Remove from favorites"
+                  >
+                    <Trash2 className="h-5 w-5 text-red-500" />
+                  </button>
                 </div>
                 <div className="p-6">
                   <h3 className="font-serif font-bold text-xl mb-2">{book.title}</h3>
