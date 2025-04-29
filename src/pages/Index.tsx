@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { books } from '../data/books';
 import { Book } from '../types/book';
-import { BookSwipeCard } from '../components/BookSwipeCard';
+import { SwipeArea } from '../components/BookSwipeCard';
 import { Header } from '../components/Header';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { addFavoriteBook } from '../utils/localStorage';
