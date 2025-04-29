@@ -25,6 +25,8 @@ export function BookCard({ book, onLike, onDislike, isTop = false }: BookCardPro
     onLike(book);
   };
 
+  export default BookCard;
+
   const handleDislike = () => {
     setAnimation('animate-swipe-left');
     onDislike(book);
